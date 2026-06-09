@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fafafa;
+  --foreground: #2d3748;
+  --primary: #4299e1;
+  --secondary: #68d391;
+  --accent: #ed8936;
+  --muted: #f7fafc;
+  --border: #e2e8f0;
+}
+
+/* Dark theme variables */
+.dark {
+  --background: #0f172a;
+  --foreground: #e2e8f0;
+  --primary: #60a5fa;
+  --secondary: #34d399;
+  --accent: #fbbf24;
+  --muted: #1e293b;
+  --border: #334155;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light theme background with warm soft fluid flow */
+body:not(.dark) {
+  background: radial-gradient(circle at 10% 20%, rgba(240, 253, 244, 0.7) 0%, rgba(240, 249, 255, 0.5) 90.1%),
+              radial-gradient(circle at 90% 80%, rgba(254, 243, 199, 0.4) 0%, rgba(243, 232, 255, 0.4) 100%);
+  background-attachment: fixed;
+}
+
+/* Dark theme background - deep, premium starry night */
+.dark body {
+  background: radial-gradient(circle at 20% 30%, #0b0f19 0%, #090d16 100%),
+              radial-gradient(circle at 80% 80%, rgba(6, 78, 59, 0.15) 0%, rgba(13, 74, 103, 0.15) 100%);
+  background-attachment: fixed;
+}
+
+/* Custom slider styles with smooth expanding on hover */
+.slider {
+  appearance: none;
+  background: linear-gradient(to right, #cbd5e1, #e2e8f0);
+  border-radius: 9999px;
+  height: 4px;
+  transition: height 0.2s ease, background 0.2s ease;
+}
+
+.slider:hover, .slider:focus {
+  height: 6px;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10b981;
+  cursor: pointer;
+  box-shadow: 0 0 0 0px rgba(16, 185, 129, 0);
+  border: 2px solid white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.slider:hover::-webkit-slider-thumb, .slider:focus::-webkit-slider-thumb {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15);
+  background: #059669;
+}
+
+.slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10b981;
+  cursor: pointer;
+  border: 2px solid white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.slider:hover::-moz-range-thumb, .slider:focus::-moz-range-thumb {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(226, 232, 240, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card-hover:hover {
+  box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.08), 0 10px 20px -10px rgba(16, 185, 129, 0.04);
+}
+
+/* Two-line clamp for dense sound cards */
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.glass-bento {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px) saturate(130%);
+  -webkit-backdrop-filter: blur(20px) saturate(130%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4),
+              0 10px 30px -10px rgba(15, 23, 42, 0.03);
+  border-radius: 24px;
+}
+
+.dark .glass-bento {
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.04),
+              inset 0 -1px 0px rgba(0, 0, 0, 0.1),
+              0 10px 30px -15px rgba(0, 0, 0, 0.5);
+  border-radius: 24px;
+}
+
+/* Card hover with multi-layer inner glow & shadow (DesignPrompts Award style) */
+.card-hover {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover:hover {
+  border-color: rgba(16, 185, 129, 0.25);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5),
+              0 25px 50px -12px rgba(16, 185, 129, 0.08),
+              0 12px 24px -10px rgba(16, 185, 129, 0.04);
+}
+
+.dark .card-hover:hover {
+  border-color: rgba(52, 211, 153, 0.2);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08),
+              inset 0 0 15px rgba(52, 211, 153, 0.02),
+              0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}
