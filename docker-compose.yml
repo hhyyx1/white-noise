@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: white-noise:latest
+    container_name: white-noise-app
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      - "${PORT:-3000}:3000"
+    restart: unless-stopped
+
+  static:
+    profiles:
+      - static
+    build:
+      context: .
+      dockerfile: Dockerfile.static
+    image: white-noise:static
+    container_name: white-noise-static
+    ports:
+      - "${STATIC_PORT:-8080}:80"
+    restart: unless-stopped

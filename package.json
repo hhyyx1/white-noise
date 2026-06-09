@@ -14,7 +14,11 @@
     "build:cloudflare": "npm run optimize-assets && npm run build:static",
     "deploy:vercel": "node scripts/deploy.js vercel",
     "deploy:cloudflare": "node scripts/deploy.js cloudflare",
-    "deploy:both": "node scripts/deploy.js both"
+    "deploy:both": "node scripts/deploy.js both",
+    "docker:build": "docker build -t white-noise:latest .",
+    "docker:run": "docker run --rm -p 3000:3000 white-noise:latest",
+    "docker:build:static": "docker build -f Dockerfile.static -t white-noise:static .",
+    "docker:run:static": "docker run --rm -p 8080:80 white-noise:static"
   },
   "dependencies": {
     "framer-motion": "^12.19.1",

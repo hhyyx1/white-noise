@@ -31,6 +31,84 @@ vercel --prod
 在 Vercel Dashboard 的项目设置中，添加以下环境变量（如果需要）：
 - `NODE_ENV=production`
 
+## 🐳 Docker 部署
+
+本项目支持两种 Docker 部署方式：
+
+### 方式一：Next.js Server 镜像（推荐通用容器平台）
+
+适用于 Docker、Docker Compose、云服务器、Coolify、Dokploy、1Panel、Portainer 等需要运行 Node.js 服务的场景。该模式使用 Next.js `standalone` 输出，生产镜像体积更小，运行时不需要完整开发依赖。
+
+```bash
+# 构建镜像
+npm run docker:build
+
+# 启动容器
+npm run docker:run
+```
+
+等价 Docker 命令：
+
+```bash
+docker build -t white-noise:latest .
+docker run --rm -p 3000:3000 white-noise:latest
+```
+
+访问：
+
+```txt
+http://localhost:3000
+```
+
+### 方式二：静态 Nginx 镜像（适合纯静态部署）
+
+适用于只需要托管静态文件的场景。该模式会执行 `npm run build:static`，并用 Nginx 托管 `out/` 目录。
+
+```bash
+# 构建静态镜像
+npm run docker:build:static
+
+# 启动静态容器
+npm run docker:run:static
+```
+
+等价 Docker 命令：
+
+```bash
+docker build -f Dockerfile.static -t white-noise:static .
+docker run --rm -p 8080:80 white-noise:static
+```
+
+访问：
+
+```txt
+http://localhost:8080
+```
+
+### Docker Compose
+
+默认启动 Next.js Server 模式：
+
+```bash
+docker compose up -d --build app
+```
+
+启动静态 Nginx 模式：
+
+```bash
+docker compose --profile static up -d --build static
+```
+
+### Docker 文件说明
+
+| 文件 | 作用 |
+|------|------|
+| `Dockerfile` | 构建并运行 Next.js Server 版本 |
+| `Dockerfile.static` | 构建静态导出版本并用 Nginx 托管 |
+| `nginx.conf` | 静态资源缓存、gzip、路由 fallback 配置 |
+| `.dockerignore` | 排除 `node_modules`、`.next`、`out`、备份目录等，减小构建上下文 |
+| `docker-compose.yml` | 提供 Server / Static 两种 compose 服务 |
+
 ## ☁️ Cloudflare Pages 部署
 
 ### 方法一：通过 Cloudflare Dashboard（推荐）

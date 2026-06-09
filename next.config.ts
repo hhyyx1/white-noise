@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const isStatic = process.env.BUILD_MODE === 'static';
+const isDocker = process.env.BUILD_MODE === 'docker';
 
 const nextConfig: NextConfig = {
   // 根据环境变量决定是否使用静态导出
@@ -10,6 +11,11 @@ const nextConfig: NextConfig = {
     distDir: 'out',
   }),
   
+  // Docker 镜像使用 standalone 输出，减小生产镜像体积
+  ...(isDocker && {
+    output: 'standalone',
+  }),
+
   images: {
     unoptimized: true
   },
