@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "build:static": "cross-env BUILD_MODE=static next build",
     "build:vercel": "next build",

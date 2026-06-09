@@ -56,3 +56,7 @@ next-env.d.ts
 
 # OS
 Thumbs.db
+
+# BMad Method V6
+_bmad/
+_bmad-output/
